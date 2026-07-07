@@ -204,3 +204,37 @@
 })();
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+const form = document.getElementById("contact-form");
+
+form.addEventListener("submit", async function(e) {
+
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+
+        method: "POST",
+
+        body: formData
+
+    });
+
+    const result = await response.json();
+
+    if(result.success){
+
+        alert("Message Sent Successfully!");
+
+        form.reset();
+
+    }else{
+
+        alert("Failed to send message.");
+
+        console.log(result);
+
+    }
+
+});
